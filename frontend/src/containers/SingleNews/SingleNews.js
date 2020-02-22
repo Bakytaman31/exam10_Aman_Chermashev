@@ -76,7 +76,7 @@ class SingleNews extends Component {
 
 const mapStateToProps = state => ({
     singleNews: state.singleNews,
-    comments: state.comments
+    comments: state.comments,
 });
 
 const mapDispatchToProps = dispatch => ({
