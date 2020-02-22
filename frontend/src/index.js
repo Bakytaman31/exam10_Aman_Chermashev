@@ -6,15 +6,18 @@ import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 
 import newsReducer from './store/reducers/newsReducer';
+import {BrowserRouter} from "react-router-dom";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(newsReducer, composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
-    <Provider store={store}>
-        <App/>
-    </Provider>
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

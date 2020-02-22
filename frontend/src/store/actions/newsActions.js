@@ -15,6 +15,7 @@ export const getNews = () => {
 export const getComments = id => {
     return async (dispatch) => {
         const response = await axiosApp.get(`/comments?newsId=${id}`);
+        console.log(response.data);
         dispatch(getCommentsSuccess(response.data));
     }
 };
@@ -24,5 +25,33 @@ export const getSingleNews = id => {
         const response = await axiosApp.get(`/news/${id}`);
         dispatch(getSingleNewsSuccess(response.data));
         dispatch(getComments(id));
+    }
+};
+
+export const postNews = news => {
+    return async (dispatch) => {
+        await axiosApp.post('/news', news);
+        dispatch(getNews());
+    }
+};
+
+export const postComment = (comment, id) => {
+    return async (dispatch) => {
+        await axiosApp.post('/comments', comment);
+        dispatch(getComments(id));
+    }
+};
+
+export const deletePost = id => {
+    return async (dispatch) => {
+        await axiosApp.delete(`/news/${id}`);
+        dispatch(getNews());
+    }
+};
+
+export const deleteComment = (id, newsId) => {
+    return async (dispatch) => {
+        await axiosApp.delete(`/comments/${id}`);
+        dispatch(getComments(newsId));
     }
 };
